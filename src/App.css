@@ -1,0 +1,38 @@
+.wrapper {
+    width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.success,
+.fail,
+.mic {
+    width: 75px;
+    height: 75px;
+}
+
+.play {
+    width: 25px;
+    height: 25px;
+}
+
+.sentence-wrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+.sentence {
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.mic__listening {
+    animation: mic-spin infinite 10s linear;
+}
+
+@keyframes mic-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
