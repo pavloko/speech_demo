@@ -44,7 +44,7 @@ class App extends Component {
 
   componentDidMount() {
     if (!('webkitSpeechRecognition' in window)) {
-      console.warn('No Speech API');
+      console.warn('No SpeechRecognition API');
     } else {
       this.recognition = new window.webkitSpeechRecognition();
       this.recognition.lang = 'en-US';
@@ -70,9 +70,19 @@ class App extends Component {
   };
 
   playSentence = () => {
+    // window.responsiveVoice.speak(this.state.sentence, "UK English Male", {pitch: 1});
     let synth = window.speechSynthesis;
     let sentenceToSpeak = new SpeechSynthesisUtterance(this.state.sentence);
-    sentenceToSpeak.lang = 'en-GB'; // Sounds much better than en-US, need to look into SpeechSynthesisVoice
+    //  sentenceToSpeak.lang = 'en-GB'; // Sounds much better than en-US, need to look into SpeechSynthesisVoice
+    window.speechSynthesis.getVoices().forEach((voice) => {
+      if (voice.name === 'Daniel') { // Daniel sounds great on all desktop browsers (not tested IE), but doesn't work on mobile.
+        console.log(voice)
+        sentenceToSpeak.voice = voice
+      }
+      if (voice.lang === 'en-GB' || voice.lang === 'en-US') {
+        console.log(voice.name, voice.lang)
+      }
+    })
     synth.speak(sentenceToSpeak);
   };
 
